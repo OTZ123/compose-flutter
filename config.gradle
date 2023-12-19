@@ -1,0 +1,10 @@
+ext {
+    deps = [
+            flutter_shell_debug  : 'com.juke.flutter_shell:flutter_debug:1.0',
+            flutter_shell_profile: 'com.juke.flutter_shell:flutter_profile:1.0',
+            flutter_shell_release: 'com.juke.flutter_shell:flutter_release:1.0',
+    ]
+    isSourceCode = [
+            FlutterShell: false
+    ]
+}

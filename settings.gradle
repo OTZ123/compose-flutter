@@ -4,13 +4,18 @@ pluginManagement {
         maven { url 'https://maven.aliyun.com/repository/public' }
         maven { url 'https://maven.aliyun.com/repository/google' }
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
+        maven { url 'https://storage.flutter-io.cn/download.flutter.io' }
+        maven {
+            allowInsecureProtocol = true
+            url 'http://download.flutter.io'
+        }
         gradlePluginPortal()
         google()
         mavenCentral()
     }
 }
 dependencyResolutionManagement {
-    repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
+    repositoriesMode.set(RepositoriesMode.PREFER_SETTINGS)
     repositories {
         maven { url 'https://maven.aliyun.com/repository/central' }
         maven { url 'https://maven.aliyun.com/repository/public' }
@@ -18,10 +23,32 @@ dependencyResolutionManagement {
         maven { url 'https://maven.aliyun.com/repository/gradle-plugin' }
         maven { url 'https://developer.huawei.com/repo/' }
         maven { url "https://jitpack.io" }
+        maven { url 'https://storage.flutter-io.cn/download.flutter.io' }
+        maven {
+            allowInsecureProtocol = true
+            url 'http://download.flutter.io'
+        }
+        maven {
+            allowInsecureProtocol = true
+            url 'http://60.204.245.11:8081/repository/maven-releases'
+        }
         google()
         mavenCentral()
         jcenter()
     }
 }
+
+apply from: "config.gradle"
+
 rootProject.name = "composeLearning"
 include ':app'
+include ':FlutterModule'
+if (ext.isSourceCode.FlutterShell) {
+    include ':FlutterShell'
+    project(':FlutterShell').projectDir = new File(settingsDir.parentFile, 'flutter-shell')
+    setBinding(new Binding([gradle: this]))
+    evaluate(new File(
+            settingsDir.parentFile,
+            'flutter-shell/.android/include_flutter.groovy'
+    ))
+}
