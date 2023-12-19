@@ -44,8 +44,6 @@ rootProject.name = "composeLearning"
 include ':app'
 include ':FlutterModule'
 if (ext.isSourceCode.FlutterShell) {
-    include ':FlutterShell'
-    project(':FlutterShell').projectDir = new File(settingsDir.parentFile, 'flutter-shell')
     setBinding(new Binding([gradle: this]))
     evaluate(new File(
             settingsDir.parentFile,
